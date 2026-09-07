@@ -1,3 +1,14 @@
+<?php
+
+require_once __DIR__ . '/config/database.php';
+
+$sql = "SELECT id, name FROM categories ORDER BY name ASC";
+
+$stmt = $pdo->query($sql);
+
+$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,6 +25,15 @@
         <?php
             echo "PHP está funcionando correctamente.";
         ?>
+    <h2>Categorías disponibles</h2>
+
+    <ul>
+        <?php foreach ($categories as $category): ?>
+            <li>
+                <?= htmlspecialchars($category['name']) ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 
     <script src="assets/js/app.js"></script>
 </body>
