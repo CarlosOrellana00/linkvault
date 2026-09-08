@@ -1,6 +1,24 @@
 <?php
 
-require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/../config/database.php';
+
+$sqlLinks = "
+    SELECT
+        links.id,
+        links.title,
+        links.url,
+        links.description,
+        links.is_favorite,
+        categories.name AS category_name
+    FROM links
+    INNER JOIN categories
+        ON links.category_id = categories.id
+    ORDER BY links.created_at DESC
+";
+
+$stmtLinks = $pdo->query($sqlLinks);
+
+$links = $stmtLinks->fetchAll(PDO::FETCH_ASSOC);
 
 $message = '';
 
@@ -125,6 +143,46 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             Guardar enlace
         </button>
     </form>
+    <h2>Mis enlaces</h2>
+
+    <?php if (empty($links)): ?>
+
+        <p>No hay enlaces guardados todavía.</p>
+
+    <?php else: ?>
+
+        <?php foreach ($links as $link): ?>
+
+            <article>
+                <h3>
+                    <?= htmlspecialchars($link['title']) ?>
+                </h3>
+
+                <p>
+                    Categoría:
+                    <?= htmlspecialchars($link['category_name']) ?>
+                </p>
+
+                <?php if (!empty($link['description'])): ?>
+                    <p>
+                        <?= htmlspecialchars($link['description']) ?>
+                    </p>
+                <?php endif; ?>
+
+                <p>
+                    <a
+                        href="<?= htmlspecialchars($link['url']) ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Visitar enlace
+                    </a>
+                </p>
+            </article>
+
+        <?php endforeach; ?>
+
+    <?php endif; ?>
 
     <script src="assets/js/app.js"></script>
 </body>
