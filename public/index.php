@@ -1,26 +1,13 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
-
-$sqlLinks = "
-    SELECT
-        links.id,
-        links.title,
-        links.url,
-        links.description,
-        links.is_favorite,
-        categories.name AS category_name
-    FROM links
-    INNER JOIN categories
-        ON links.category_id = categories.id
-    ORDER BY links.created_at DESC
-";
-
-$stmtLinks = $pdo->query($sqlLinks);
-
-$links = $stmtLinks->fetchAll(PDO::FETCH_ASSOC);
+require_once __DIR__ . '/../app/repositories/LinkRepository.php';
 
 $message = '';
+
+if (isset($_GET['created'])) {
+    $message = 'Enlace guardado correctamente.';
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
@@ -32,24 +19,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Completa los campos obligatorios.';
     } elseif (!filter_var($url, FILTER_VALIDATE_URL)) {
         $message = 'La URL ingresada no es válida.';
+    } elseif (linkExistsByUrl($pdo, $url)) {
+        $message = 'Ese enlace ya está guardado.';
     } else {
-        // $message = 'Formulario recibido correctamente.';
-        $sqlInsert = "
-        INSERT INTO links (title, url, description, category_id)
-        VALUES (:title, :url, :description, :category_id)";
+        $created = createLink(
+            $pdo,
+            $title,
+            $url,
+            $description,
+            (int) $categoryId
+        );
 
-        $stmtInsert = $pdo->prepare($sqlInsert);
+        if ($created) {
+            header('Location: /?created=1');
+            exit;
+        }
 
-        $stmtInsert->execute([
-            ':title' => $title,
-            ':url' => $url,
-            ':description' => $description,
-            ':category_id' => $categoryId
-        ]);
-
-        $message = 'Enlace guardado correctamente.';
+        $message = 'No fue posible guardar el enlace.';
     }
 }
+
 
 $sql = "SELECT id, name FROM categories ORDER BY name ASC";
 
@@ -57,7 +46,10 @@ $stmt = $pdo->query($sql);
 
 $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$links = getAllLinks($pdo);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -71,9 +63,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <h1>LinkVault</h1>
     <p>Mi gestor personal de enlaces.</p>
-        <?php
-            echo "PHP está funcionando correctamente.";
-        ?>
+
     <h2>Categorías disponibles</h2>
 
     <ul>
@@ -143,7 +133,10 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             Guardar enlace
         </button>
     </form>
-    <h2>Mis enlaces</h2>
+    <!-- <h2>Mis enlaces</h2> -->
+    <p>
+        Registros recuperados: <?= count($links) ?>
+    </p> 
 
     <?php if (empty($links)): ?>
 
