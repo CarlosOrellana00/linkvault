@@ -95,3 +95,54 @@ function getLinkById(PDO $pdo, int $id): ?array
 
     return $link ?: null;
 }
+
+function updateLink(
+    PDO $pdo,
+    int $id,
+    string $title,
+    string $url,
+    string $description,
+    int $categoryId
+): bool {
+    $sql = "
+        UPDATE links
+        SET
+            title = :title,
+            url = :url,
+            description = :description,
+            category_id = :category_id
+        WHERE id = :id
+    ";
+
+    $stmt = $pdo->prepare($sql);
+
+    return $stmt->execute([
+        ':id' => $id,
+        ':title' => $title,
+        ':url' => $url,
+        ':description' => $description,
+        ':category_id' => $categoryId
+    ]);
+}
+
+function linkExistsByUrlExceptId(
+    PDO $pdo,
+    string $url,
+    int $id
+): bool {
+    $sql = "
+        SELECT COUNT(*)
+        FROM links
+        WHERE url = :url
+        AND id <> :id
+    ";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([
+        ':url' => $url,
+        ':id' => $id
+    ]);
+
+    return $stmt->fetchColumn() > 0;
+}
