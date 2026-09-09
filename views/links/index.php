@@ -85,9 +85,9 @@
                         </td>
 
                         <td>
-                            <button type="button">
+                            <a href="/?view=edit&id=<?= (int) $link['id'] ?>">
                                 Editar
-                            </button>
+                            </a>
 
                             <button type="button">
                                 Eliminar

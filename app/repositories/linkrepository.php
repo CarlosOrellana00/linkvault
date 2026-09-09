@@ -69,3 +69,29 @@ function linkExistsByUrl(PDO $pdo, string $url): bool
 
     return $stmt->fetchColumn() > 0;
 }
+
+function getLinkById(PDO $pdo, int $id): ?array
+{
+    $sql = "
+        SELECT
+            id,
+            title,
+            url,
+            description,
+            category_id,
+            is_favorite
+        FROM links
+        WHERE id = :id
+        LIMIT 1
+    ";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([
+        ':id' => $id
+    ]);
+
+    $link = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $link ?: null;
+}
