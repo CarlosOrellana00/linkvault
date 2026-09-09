@@ -146,3 +146,17 @@ function linkExistsByUrlExceptId(
 
     return $stmt->fetchColumn() > 0;
 }
+
+function deleteLink(PDO $pdo, int $id): bool
+{
+    $sql = "
+        DELETE FROM links
+        WHERE id = :id
+    ";
+
+    $stmt = $pdo->prepare($sql);
+
+    return $stmt->execute([
+        ':id' => $id
+    ]);
+}

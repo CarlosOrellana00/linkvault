@@ -17,6 +17,10 @@ if (isset($_GET['updated'])) {
     $message = 'Enlace actualizado correctamente.';
 }
 
+if (isset($_GET['deleted'])) {
+    $message = 'Enlace eliminado correctamente.';
+}
+
 /*
 |--------------------------------------------------------------------------
 | CREAR ENLACE
@@ -142,6 +146,39 @@ if ($view === 'edit') {
     }
 
     require __DIR__ . '/../views/links/edit.php';
+    exit;
+}
+
+/*
+|--------------------------------------------------------------------------
+| ELIMINAR ENLACE
+|--------------------------------------------------------------------------
+*/
+
+if ($view === 'delete') {
+
+    $id = (int) ($_GET['id'] ?? 0);
+
+    if ($id <= 0) {
+        header('Location: /');
+        exit;
+    }
+
+    $link = getLinkById($pdo, $id);
+
+    if ($link === null) {
+        header('Location: /');
+        exit;
+    }
+
+    $deleted = deleteLink($pdo, $id);
+
+    if ($deleted) {
+        header('Location: /?deleted=1');
+        exit;
+    }
+
+    header('Location: /');
     exit;
 }
 
