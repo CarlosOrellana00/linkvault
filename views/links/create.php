@@ -44,7 +44,7 @@
                             Selecciona una categoría
                         </option>
                         <?php foreach ($categories as $category): ?>
-                            <option value="<?= (int) $category['id'] ?>">
+                            <option value="<?= (int) $category['id'] ?>"> 
                                 <?= htmlspecialchars($category['name']) ?>
                             </option>
                         <?php endforeach; ?>
