@@ -17,93 +17,98 @@
 </head>
 
 <body>
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <h1>LinkVault</h1>
+                <p>Mi gestor personal de enlaces.</p>
+            </div>
 
-    <h1>LinkVault</h1>
+            <a class="btn btn-primary" href="/?view=create">
+                Agregar nuevo enlace
+            </a>
+        </header>
 
-    <p>Mi gestor personal de enlaces.</p>
+        <?php if ($message !== ''): ?>
+            <div class="alert">
+                <?= htmlspecialchars($message) ?>
+            </div>
+        <?php endif; ?>
 
-    <?php if ($message !== ''): ?>
+        <section class="card">
+            <div class="table-header">
+                <h2>Mis enlaces</h2>
+            </div>
 
-        <p>
-            <?= htmlspecialchars($message) ?>
-        </p>
+            <?php if (empty($links)): ?>
+                <p>No hay enlaces guardados todavía.</p>
+            <?php else: ?>
 
-    <?php endif; ?>
+                <div class="table-wrapper">
 
-    <p>
-        <a href="/?view=create">
-            Agregar nuevo enlace
-        </a>
-    </p>
+                    <table class="links-table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>URL</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
 
-    <h2>Mis enlaces</h2>
+                        <tbody>
+                            <?php foreach ($links as $link): ?>
 
-    <?php if (empty($links)): ?>
+                                <tr>
 
-        <p>No hay enlaces guardados todavía.</p>
+                                    <td>
+                                        <?= htmlspecialchars($link['title']) ?>
+                                    </td>
 
-    <?php else: ?>
+                                    <td>
+                                        <a class="link-url" href="<?= htmlspecialchars($link['url']) ?>" target="_blank" rel="noopener noreferrer" >
+                                            <?= htmlspecialchars($link['url']) ?>
+                                        </a>
+                                    </td>
 
-        <table>
+                                    <td>
+                                        <?= htmlspecialchars($link['description']) ?>
+                                    </td>
 
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>URL</th>
-                    <th>Descripción</th>
-                    <th>Categoría</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+                                    <td>
+                                        <span class="badge">
+                                            <?= htmlspecialchars($link['category_name']) ?>
+                                        </span>
+                                    </td>
 
-            <tbody>
+                                    <td class="actions">
 
-                <?php foreach ($links as $link): ?>
+                                        <a
+                                            class="btn btn-secondary"
+                                            href="/?view=edit&id=<?= (int) $link['id'] ?>"
+                                        >
+                                            Editar
+                                        </a>
 
-                    <tr>
+                                        <a
+                                            class="btn btn-danger"
+                                            href="/?view=delete&id=<?= (int) $link['id'] ?>"
+                                            onclick="return confirm('¿Estás seguro de que deseas eliminar este enlace?');"
+                                        >
+                                            Eliminar
+                                        </a>
 
-                        <td>
-                            <?= htmlspecialchars($link['title']) ?>
-                        </td>
+                                    </td>
 
-                        <td>
-                            <a
-                                href="<?= htmlspecialchars($link['url']) ?>"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <?= htmlspecialchars($link['url']) ?>
-                            </a>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($link['description']) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($link['category_name']) ?>
-                        </td>
-
-                        <td>
-                            <a href="/?view=edit&id=<?= (int) $link['id'] ?>">
-                                Editar
-                            </a>
-
-                            <a ref="/?view=delete&id=<?= (int) $link['id'] ?>"  onclick="return confirm('¿Estás seguro de que deseas eliminar este enlace?');">
-                                Eliminar
-                            </a>
-                        </td>
-
-                    </tr>
-
-                <?php endforeach; ?>
-
-            </tbody>
-
-        </table>
-
-    <?php endif; ?>
-
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+        </section>
+    </main>
     <script src="/assets/js/app.js"></script>
 
 </body>
