@@ -11,16 +11,18 @@ $message = '';
 
 if (isset($_GET['created'])) {
     $message = 'Enlace guardado correctamente.';
+    $messageType = 'success';
 }
 
 if (isset($_GET['updated'])) {
     $message = 'Enlace actualizado correctamente.';
+    $messageType = 'success';
 }
 
 if (isset($_GET['deleted'])) {
     $message = 'Enlace eliminado correctamente.';
+    $messageType = 'success';
 }
-
 /*
 |--------------------------------------------------------------------------
 | CREAR ENLACE

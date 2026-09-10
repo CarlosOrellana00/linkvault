@@ -19,8 +19,8 @@
             </a>
         </header>
 
-        <?php if ($message !== ''): ?>
-            <div class="alert">
+       <?php if ($message !== ''): ?>
+            <div class="alert alert-<?= htmlspecialchars($messageType) ?>">
                 <?= htmlspecialchars($message) ?>
             </div>
         <?php endif; ?>
