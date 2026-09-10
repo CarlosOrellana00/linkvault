@@ -89,9 +89,9 @@
                                 Editar
                             </a>
 
-                            <button type="button">
+                            <a ref="/?view=delete&id=<?= (int) $link['id'] ?>"  onclick="return confirm('¿Estás seguro de que deseas eliminar este enlace?');">
                                 Eliminar
-                            </button>
+                            </a>
                         </td>
 
                     </tr>
