@@ -18,16 +18,29 @@
                 Agregar nuevo enlace
             </a>
         </header>
-
-       <?php if ($message !== ''): ?>
+        <?php if ($message !== ''): ?>
             <div class="alert alert-<?= htmlspecialchars($messageType) ?>">
                 <?= htmlspecialchars($message) ?>
             </div>
         <?php endif; ?>
-
         <section class="card">
             <div class="table-header">
                 <h2>Mis enlaces</h2>
+                <div class="filter-group">
+                    <label for="categoryFilter">
+                        Filtrar por categoría
+                    </label>
+                    <select id="categoryFilter" class="form-control category-filter">
+                        <option value="all">
+                            Todas las categorías
+                        </option>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= htmlspecialchars($category['name']) ?>">
+                                <?= htmlspecialchars($category['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
             <?php if (empty($links)): ?>
                 <p>No hay enlaces guardados todavía.</p>
@@ -45,28 +58,30 @@
                         </thead>
                         <tbody>
                             <?php foreach ($links as $link): ?>
-                                <tr>
+                                <tr data-category="<?= htmlspecialchars($link['category_name']) ?>">
                                     <td>
                                         <?= htmlspecialchars($link['title']) ?>
                                     </td>
                                     <td>
-                                        <a class="link-url" href="<?= htmlspecialchars($link['url']) ?>" target="_blank" rel="noopener noreferrer" >
+                                        <a class="link-url" href="<?= htmlspecialchars($link['url']) ?>" target="_blank" rel="noopener noreferrer">
                                             <?= htmlspecialchars($link['url']) ?>
                                         </a>
                                     </td>
                                     <td>
                                         <?= htmlspecialchars($link['description']) ?>
                                     </td>
+
                                     <td>
                                         <span class="badge">
                                             <?= htmlspecialchars($link['category_name']) ?>
                                         </span>
                                     </td>
+
                                     <td class="actions">
                                         <a class="btn btn-secondary" href="/?view=edit&id=<?= (int) $link['id'] ?>" >
                                             Editar
                                         </a>
-                                        <a class="btn btn-danger" href="/?view=delete&id=<?= (int) $link['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este enlace?');" >
+                                        <a class="btn btn-danger" href="/?view=delete&id=<?= (int) $link['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este enlace?');">
                                             Eliminar
                                         </a>
                                     </td>

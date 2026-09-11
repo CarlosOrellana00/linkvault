@@ -189,7 +189,7 @@ if ($view === 'delete') {
 | LISTAR ENLACES
 |--------------------------------------------------------------------------
 */
-
 $links = getAllLinks($pdo);
+$categories = getAllCategories($pdo);
 
 require __DIR__ . '/../views/links/index.php';
