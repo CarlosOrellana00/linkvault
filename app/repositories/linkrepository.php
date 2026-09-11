@@ -160,3 +160,18 @@ function deleteLink(PDO $pdo, int $id): bool
         ':id' => $id
     ]);
 }
+
+function toggleFavorite(PDO $pdo, int $id): bool
+{
+    $sql = "
+        UPDATE links
+        SET is_favorite = NOT is_favorite
+        WHERE id = :id
+    ";
+
+    $stmt = $pdo->prepare($sql);
+
+    return $stmt->execute([
+        ':id' => $id
+    ]);
+}

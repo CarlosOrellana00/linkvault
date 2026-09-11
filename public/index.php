@@ -159,7 +159,12 @@ if ($view === 'edit') {
 
 if ($view === 'delete') {
 
-    $id = (int) ($_GET['id'] ?? 0);
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header('Location: /');
+        exit;
+    }
+
+    $id = (int) ($_POST['id'] ?? 0);
 
     if ($id <= 0) {
         header('Location: /');
@@ -183,7 +188,43 @@ if ($view === 'delete') {
     header('Location: /');
     exit;
 }
+/*
+|--------------------------------------------------------------------------
+| CAMBIAR FAVORITO
+|--------------------------------------------------------------------------
+*/
 
+if ($view === 'favorite') {
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header('Location: /');
+        exit;
+    }
+
+    $id = (int) ($_POST['id'] ?? 0);
+
+    if ($id <= 0) {
+        header('Location: /');
+        exit;
+    }
+
+    $link = getLinkById($pdo, $id);
+
+    if ($link === null) {
+        header('Location: /');
+        exit;
+    }
+
+    $updated = toggleFavorite($pdo, $id);
+
+    if ($updated) {
+        header('Location: /');
+        exit;
+    }
+
+    header('Location: /');
+    exit;
+}
 /*
 |--------------------------------------------------------------------------
 | LISTAR ENLACES

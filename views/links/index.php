@@ -26,6 +26,7 @@
         <section class="card">
             <div class="table-header">
                 <h2>Mis enlaces</h2>
+
                 <div class="filter-group">
                     <label for="categoryFilter">
                         Filtrar por categoría
@@ -40,6 +41,12 @@
                             </option>
                         <?php endforeach; ?>
                     </select>
+
+                    <label class="favorite-filter">
+                        <input type="checkbox" id="favoriteFilter">
+                            Mostrar solo favoritos
+                    </label>
+
                 </div>
             </div>
             <?php if (empty($links)): ?>
@@ -49,6 +56,7 @@
                     <table class="links-table">
                         <thead>
                             <tr>
+                                <th>Favorito</th>
                                 <th>Título</th>
                                 <th>URL</th>
                                 <th>Descripción</th>
@@ -58,10 +66,22 @@
                         </thead>
                         <tbody>
                             <?php foreach ($links as $link): ?>
-                                <tr data-category="<?= htmlspecialchars($link['category_name']) ?>">
+                                <tr data-category="<?= htmlspecialchars($link['category_name']) ?>" data-favorite="<?= (int) $link['is_favorite'] ?>">
+                                    
+                                    <td>
+                                         <form method="POST" action="/?view=favorite">
+                                            <input type="hidden" name="id" value="<?= (int) $link['id'] ?>">
+                                            <button type="submit" class="favorite-button" title="Cambiar favorito">
+                                                <?= (int) $link['is_favorite'] === 1 ? '★' : '☆' ?>
+                                            </button>
+                                        </form>
+                                    </td>
+
                                     <td>
                                         <?= htmlspecialchars($link['title']) ?>
                                     </td>
+
+                                        
                                     <td>
                                         <a class="link-url" href="<?= htmlspecialchars($link['url']) ?>" target="_blank" rel="noopener noreferrer">
                                             <?= htmlspecialchars($link['url']) ?>
@@ -81,9 +101,9 @@
                                         <a class="btn btn-secondary" href="/?view=edit&id=<?= (int) $link['id'] ?>" >
                                             Editar
                                         </a>
-                                        <a class="btn btn-danger" href="/?view=delete&id=<?= (int) $link['id'] ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este enlace?');">
+                                        <button type="button" class="btn btn-danger delete-button" data-id="<?= (int) $link['id'] ?>" data-title="<?= htmlspecialchars($link['title']) ?>">
                                             Eliminar
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -93,6 +113,26 @@
             <?php endif; ?>
         </section>
     </main>
+    <div id="deleteModal" class="modal-overlay" aria-hidden="true" >
+        <div class="modal-box">
+            <h2>Eliminar enlace</h2>
+            <p>
+                ¿Estás seguro de que deseas eliminar
+                <strong id="deleteLinkTitle"></strong>?
+            </p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelDelete">
+                    Cancelar
+                </button>
+               <form method="POST" action="/?view=delete" id="deleteForm">
+                    <input type="hidden" name="id" id="deleteLinkId">
+                    <button type="submit" class="btn btn-danger">
+                        Eliminar
+                    </button>
+                </form>
+        </div>
+    </div>
+</div>
     <script src="/assets/js/app.js"></script>
 </body>
 </html>
