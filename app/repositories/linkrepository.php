@@ -27,7 +27,8 @@ function createLink(
     string $url,
     string $description,
     int $categoryId
-): bool {
+): int {
+
     $sql = "
         INSERT INTO links (
             title,
@@ -45,12 +46,14 @@ function createLink(
 
     $stmt = $pdo->prepare($sql);
 
-    return $stmt->execute([
+    $stmt->execute([
         ':title' => $title,
         ':url' => $url,
         ':description' => $description,
         ':category_id' => $categoryId
     ]);
+
+    return (int) $pdo->lastInsertId();
 }
 
 function linkExistsByUrl(PDO $pdo, string $url): bool

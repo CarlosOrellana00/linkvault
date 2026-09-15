@@ -68,6 +68,7 @@
                                 <th>URL</th>
                                 <th>Descripción</th>
                                 <th>Categoría</th>
+                                <th>Tags</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -105,6 +106,21 @@
                                         </span>
                                     </td>
 
+                                    
+                                    <td>
+                                        <?php $linkTags = getTagsByLinkId($pdo, (int) $link['id']); ?>
+
+                                        <?php if (empty($linkTags)): ?>
+                                            <span class="text-muted">Sin tags</span>
+                                        <?php else: ?>
+                                            <?php foreach ($linkTags as $tag): ?>
+                                                <span class="badge">
+                                                    <?= htmlspecialchars($tag['name']) ?>
+                                                </span>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </td>
+
                                     <td class="actions">
                                         <a class="btn btn-secondary" href="/?view=edit&id=<?= (int) $link['id'] ?>" >
                                             Editar
@@ -113,6 +129,7 @@
                                             Eliminar
                                         </button>
                                     </td>
+
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

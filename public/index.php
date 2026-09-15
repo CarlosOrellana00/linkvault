@@ -33,6 +33,7 @@ if (isset($_GET['deleted'])) {
 if ($view === 'create') {
 
     $categories = getAllCategories($pdo);
+    $tags = getAllTags($pdo);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -55,7 +56,7 @@ if ($view === 'create') {
 
         } else {
 
-            $created = createLink(
+            $newLinkId = createLink(
                 $pdo,
                 $title,
                 $url,
@@ -63,7 +64,14 @@ if ($view === 'create') {
                 (int) $categoryId
             );
 
-            if ($created) {
+            if ($newLinkId) {
+
+                $tagIds = $_POST['tags'] ?? [];
+
+                if (!empty($tagIds)) {
+                    attachTagsToLink($pdo, $newLinkId, $tagIds);
+                }
+
                 header('Location: /?created=1');
                 exit;
             }
@@ -232,6 +240,14 @@ if ($view === 'favorite') {
 |--------------------------------------------------------------------------
 */
 $links = getAllLinks($pdo);
+
+foreach ($links as &$link) {
+    $link['tags'] = getTagsByLinkId($pdo, (int) $link['id']);
+}
+
+unset($link);
+
 $categories = getAllCategories($pdo);
 
 require __DIR__ . '/../views/links/index.php';
+

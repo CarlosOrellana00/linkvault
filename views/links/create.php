@@ -37,8 +37,20 @@
                     <textarea class="form-control" id="description" name="description" rows="4"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="category_id">Categoría</label>
+                     
+                <label>Tags</label>
 
+                <div class="tags-selector">
+                    <?php foreach ($tags as $tag): ?>
+                        <label class="tag-option">
+                            <input type="checkbox" name="tags[]" value="<?= (int) $tag['id'] ?>"> 
+                               <?= htmlspecialchars($tag['name']) ?>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+                
+                <div>
+                    <label for="category_id">Categoría</label>
                     <select class="form-control" id="category_id" name="category_id" required>
                         <option value="">
                             Selecciona una categoría
