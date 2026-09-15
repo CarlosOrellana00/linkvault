@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../app/repositories/LinkRepository.php';
 require_once __DIR__ . '/../app/repositories/CategoryRepository.php';
+require_once __DIR__ . '/../app/repositories/TagRepository.php';
 
 $view = $_GET['view'] ?? 'list';
 $message = '';
