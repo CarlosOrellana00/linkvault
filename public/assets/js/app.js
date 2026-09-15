@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const categoryFilter = document.getElementById('categoryFilter');
     const favoriteFilter = document.getElementById('favoriteFilter');
+    const searchFilter = document.getElementById('searchFilter');
 
     const rows = document.querySelectorAll('.links-table tbody tr');
 
@@ -22,11 +23,15 @@ document.addEventListener('DOMContentLoaded', function () {
             ? favoriteFilter.checked
             : false;
 
+        const searchText = searchFilter
+            ? searchFilter.value.toLowerCase().trim()
+            : '';
 
         rows.forEach(function (row) {
 
             const rowCategory = row.dataset.category;
             const rowFavorite = row.dataset.favorite;
+            const rowSearch = row.dataset.search || '';
 
             const matchesCategory =
                 selectedCategory === 'all' ||
@@ -36,8 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 !onlyFavorites ||
                 rowFavorite === '1';
 
+            const matchesSearch =
+                searchText === '' ||
+                rowSearch.includes(searchText);
 
-            if (matchesCategory && matchesFavorite) {
+            if (matchesCategory && matchesFavorite && matchesSearch){
 
                 row.style.display = '';
 
@@ -65,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
+    if (searchFilter) {
+
+        searchFilter.addEventListener('input', filterLinks);
+
+    }
 
     /*
     |--------------------------------------------------------------------------

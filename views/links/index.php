@@ -42,6 +42,13 @@
                         <?php endforeach; ?>
                     </select>
 
+                    <label for="searchFilter">
+                        Buscar
+                    </label>
+
+                    <input type="search" id="searchFilter" class="form-control" placeholder="Buscar por título, URL o descripción">
+
+
                     <label class="favorite-filter">
                         <input type="checkbox" id="favoriteFilter">
                             Mostrar solo favoritos
@@ -66,7 +73,8 @@
                         </thead>
                         <tbody>
                             <?php foreach ($links as $link): ?>
-                                <tr data-category="<?= htmlspecialchars($link['category_name']) ?>" data-favorite="<?= (int) $link['is_favorite'] ?>">
+                                <tr data-category="<?= htmlspecialchars($link['category_name']) ?>" data-favorite="<?= (int) $link['is_favorite'] ?>" data-search="<?= htmlspecialchars(
+                                    strtolower($link['title'] . ' ' .$link['url'] . ' ' .$link['description'])) ?>" >
                                     
                                     <td>
                                          <form method="POST" action="/?view=favorite">
