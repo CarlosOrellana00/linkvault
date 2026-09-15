@@ -48,6 +48,29 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+
+                <div class="form-group">
+                <label>Tags</label>
+
+                <div class="tags-selector">
+                        <?php foreach ($tags as $tag): ?>
+                            <?php
+                                $isChecked = false;
+                                foreach ($linkTags as $linkTag) {
+                                    if ((int) $linkTag['id'] === (int) $tag['id']) {
+                                        $isChecked = true;
+                                        break;
+                                    }
+                                }
+                            ?>
+                            <label class="tag-option">
+                                <input type="checkbox" name="tags[]" value="<?= (int) $tag['id'] ?>" <?= $isChecked ? 'checked' : '' ?>>
+                                <?= htmlspecialchars($tag['name']) ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
                 <div class="form-actions">
                     <button class="btn btn-primary" type="submit">
                         Guardar cambios

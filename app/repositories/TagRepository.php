@@ -53,3 +53,37 @@ function getTagsByLinkId(PDO $pdo, int $linkId): array
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function syncTagsForLink(PDO $pdo, int $linkId, array $tagIds): bool
+{
+    $deleteSql = "
+        DELETE FROM link_tag
+        WHERE link_id = :link_id
+    ";
+
+    $deleteStmt = $pdo->prepare($deleteSql);
+
+    $deleteStmt->execute([
+        ':link_id' => $linkId
+    ]);
+
+    if (empty($tagIds)) {
+        return true;
+    }
+
+    $insertSql = "
+        INSERT INTO link_tag (link_id, tag_id)
+        VALUES (:link_id, :tag_id)
+    ";
+
+    $insertStmt = $pdo->prepare($insertSql);
+
+    foreach ($tagIds as $tagId) {
+        $insertStmt->execute([
+            ':link_id' => $linkId,
+            ':tag_id' => (int) $tagId
+        ]);
+    }
+
+    return true;
+}

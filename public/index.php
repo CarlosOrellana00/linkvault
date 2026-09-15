@@ -108,6 +108,9 @@ if ($view === 'edit') {
 
     $categories = getAllCategories($pdo);
 
+    $tags = getAllTags($pdo);
+    $linkTags = getTagsByLinkId($pdo, $id);
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $title = trim($_POST['title'] ?? '');
@@ -139,6 +142,10 @@ if ($view === 'edit') {
             );
 
             if ($updated) {
+                $tagIds = $_POST['tags'] ?? [];
+
+                syncTagsForLink($pdo, $id, $tagIds);
+
                 header('Location: /?updated=1');
                 exit;
             }
