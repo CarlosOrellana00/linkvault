@@ -19,7 +19,7 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
 
 .page-header h1 {
@@ -282,6 +282,30 @@ textarea.form-control {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+}
+
+/* Separación entre el título y los filtros */
+.table-header h2 {
+    margin: 0 0 20px;
+}
+
+/* Separación entre los controles de filtrado */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Cada bloque label + control */
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Separación del filtro de favoritos */
+.favorite-filter {
+    margin-top: 4px;
 }
 
 @media (max-width: 768px) {
