@@ -1,109 +1,64 @@
-# LinkVault
+# 🔗 LinkVault
 
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 
-Gestor personal de enlaces desarrollado como proyecto de portafolio para practicar desarrollo web full stack con PHP, MySQL y JavaScript.
+**LinkVault** es una aplicación web desarrollada como proyecto de práctica y portafolio para gestionar enlaces personales de forma organizada.
 
-> **Estado actual:** funcional. El proyecto continúa en una etapa de revisión y mejoras de interfaz, responsive, seguridad y documentación.
+Permite registrar recursos web, clasificarlos mediante categorías y etiquetas, marcarlos como favoritos y encontrarlos rápidamente mediante filtros y búsqueda.
 
----
-
-# Español
-
-## Descripción
-
-**LinkVault** es una aplicación web para almacenar, organizar y consultar enlaces personales desde una interfaz sencilla.
-
-Cada enlace puede contener un título, URL, descripción y categoría. Además, puede marcarse como favorito y asociarse a uno o varios tags.
-
-El proyecto comenzó como un CRUD básico y posteriormente fue reestructurado para separar la lógica de acceso a datos, las vistas, la configuración y el punto de entrada de la aplicación.
-
-Su objetivo principal es practicar fundamentos de desarrollo web sin utilizar un framework backend, trabajando directamente con PHP, PDO, MySQL, HTML, CSS y JavaScript.
+El proyecto fue desarrollado principalmente con **PHP, MySQL, HTML5, CSS3 y JavaScript**, sin utilizar un framework backend, con el objetivo de practicar y reforzar fundamentos de desarrollo web antes de avanzar hacia arquitecturas y frameworks más complejos.
 
 ---
 
-## Funcionalidades actuales
+## 📸 Vista general
 
-- Crear enlaces.
-- Consultar y listar enlaces almacenados.
+LinkVault utiliza una interfaz oscura orientada a mantener los enlaces almacenados organizados y fácilmente accesibles.
+
+![Vista principal de LinkVault](docs/screenshots/01-main-view.png)
+
+---
+
+## ✨ Características principales
+
+- Crear nuevos enlaces.
 - Editar enlaces existentes.
-- Eliminar enlaces.
-- Validar URLs.
-- Evitar URLs duplicadas.
-- Organizar enlaces mediante categorías.
-- Asociar múltiples tags a un enlace.
-- Editar las asociaciones entre enlaces y tags.
+- Eliminar enlaces mediante confirmación previa.
 - Marcar y desmarcar enlaces como favoritos.
+- Organizar enlaces mediante categorías.
+- Asociar múltiples tags a cada enlace.
+- Buscar enlaces por título, URL o descripción.
 - Filtrar enlaces por categoría.
 - Mostrar únicamente enlaces favoritos.
-- Buscar por título, URL o descripción.
-- Mostrar mensajes de confirmación y validación.
-- Interfaz con tema oscuro.
+- Validar URLs duplicadas.
+- Mostrar mensajes de confirmación después de crear, editar o eliminar.
+- Persistir la información mediante MySQL.
+- Utilizar consultas preparadas mediante PDO.
+- Adaptar la interfaz a diferentes tamaños de pantalla.
+- Mantener una interfaz visual oscura desarrollada con CSS.
 
 ---
 
-## Categorías y tags
+# 🛠️ Tecnologías utilizadas
 
-LinkVault utiliza dos sistemas complementarios para organizar los enlaces.
-
-### Categorías
-
-Cada enlace pertenece a una categoría principal.
-
-Ejemplos:
-
-- Programación
-- Documentación
-- Trabajo
-- Herramientas
-- Aprendizaje
-
-La relación entre enlaces y categorías es de **muchos a uno**: varios enlaces pueden pertenecer a una misma categoría, pero cada enlace posee una categoría principal.
-
-### Tags
-
-Los tags permiten describir un enlace mediante múltiples tecnologías o conceptos.
-
-Ejemplos:
-
-- PHP
-- Laravel
-- JavaScript
-- MySQL
-- React
-- Git
-- API
-
-Los enlaces y tags utilizan una relación **muchos a muchos**, implementada mediante la tabla intermedia `link_tag`.
-
-Un enlace puede tener varios tags y un mismo tag puede estar asociado a múltiples enlaces.
+| Tecnología | Uso |
+|---|---|
+| **PHP** | Lógica backend, procesamiento de formularios y acceso a datos |
+| **MySQL** | Persistencia y organización de datos |
+| **PDO** | Comunicación entre PHP y MySQL mediante consultas preparadas |
+| **HTML5** | Estructura de las vistas |
+| **CSS3** | Diseño, interfaz oscura y comportamiento responsive |
+| **JavaScript** | Interacciones, filtros y comportamiento dinámico |
+| **Git** | Control de versiones |
+| **GitHub** | Repositorio y documentación del proyecto |
+| **Laragon** | Entorno de desarrollo local utilizado durante el desarrollo |
 
 ---
 
-## Tecnologías
-
-| Tecnología | Versión | Uso |
-|---|---|---|
-| PHP | 8.x* | Backend y lógica de aplicación |
-| MySQL | 8.x* | Base de datos relacional |
-| PDO | Incluido con PHP | Conexión y consultas a MySQL |
-| HTML | HTML5 | Estructura de las vistas |
-| CSS | CSS3 | Diseño e interfaz |
-| JavaScript | ES6+ | Filtros, búsqueda e interacción del cliente |
-| Git | Actual | Control de versiones |
-| GitHub | — | Repositorio y portafolio |
-| Laragon | — | Entorno local de desarrollo |
-| HeidiSQL | — | Administración y revisión de la base de datos |
-
-\* La versión exacta instalada se verificará antes de preparar la documentación final del proyecto.
-
----
-
-## Estructura actual
+# 🗂️ Estructura del proyecto
 
 ```text
 LinkVault/
@@ -122,13 +77,25 @@ LinkVault/
 │   ├── schema.sql
 │   └── seed.sql
 │
+├── docs/
+│   └── screenshots/
+│       ├── 01-main-view.png
+│       ├── 02-create-form.png
+│       ├── 03-create-example.png
+│       ├── 04-edit-form.png
+│       ├── 05-create-success.png
+│       ├── 06-edit-success.png
+│       ├── 07-delete-confirmation.png
+│       ├── 08-delete-confirmation-main.png
+│       ├── 09-category-filter.png
+│       ├── 10-favorites-filter.png
+│       ├── 11-mobile-view.png
+│       └── 12-tablet-view.png
+│
 ├── public/
 │   ├── assets/
 │   │   ├── css/
-│   │   │   └── style.css
 │   │   └── js/
-│   │       └── app.js
-│   │
 │   └── index.php
 │
 ├── views/
@@ -141,454 +108,396 @@ LinkVault/
 └── README.md
 ```
 
----
+`public/index.php` funciona como punto de entrada principal de la aplicación.
 
-## Organización de la aplicación
-
-### `public/index.php`
-
-Es el punto de entrada principal de LinkVault.
-
-Funciona como un **Front Controller** sencillo y recibe las solicitudes realizadas desde la aplicación.
-
-Se encarga de determinar la operación solicitada y coordinar los repositorios y vistas correspondientes.
-
-Entre sus responsabilidades se encuentran:
-
-- listado de enlaces;
-- creación;
-- edición;
-- eliminación;
-- favoritos;
-- validaciones;
-- redirecciones;
-- carga de categorías y tags.
+Los repositorios ubicados en `app/repositories/` concentran las operaciones relacionadas con los datos, mientras que las vistas ubicadas en `views/` se encargan de presentar la interfaz al usuario.
 
 ---
 
-### `app/repositories/LinkRepository.php`
+# 🖥️ Funcionamiento
 
-Contiene las operaciones relacionadas con los enlaces y su persistencia en MySQL.
+Las siguientes capturas muestran un ejemplo completo de utilización de LinkVault.
 
-Centraliza las consultas necesarias para:
+Para demostrar las operaciones CRUD se utiliza **Código Facilito** como enlace de ejemplo.
 
-- obtener enlaces;
-- buscar un enlace mediante su ID;
-- crear enlaces;
-- actualizar enlaces;
-- eliminar enlaces;
-- comprobar URLs duplicadas;
-- gestionar el estado de favorito.
-
-Esto evita mantener consultas SQL directamente dentro de las vistas.
+> **Nota sobre los datos de demostración**
+>
+> Los nombres, URLs y referencias a sitios web o servicios externos que aparecen en las capturas, incluyendo Código Facilito, Platzi, Cisco Networking Academy, Udemy, Wikipedia, PHP y GitHub, se utilizan exclusivamente como **datos de ejemplo** para demostrar el funcionamiento de LinkVault.
+>
+> Su aparición en este proyecto no implica afiliación, patrocinio, colaboración, representación, aprobación ni relación oficial alguna entre LinkVault, su autor y las organizaciones o marcas mencionadas.
+>
+> LinkVault no utiliza sus nombres con fines comerciales ni pretende hacerse pasar por ninguno de estos servicios.
 
 ---
 
-### `app/repositories/CategoryRepository.php`
+## ➕ 1. Crear un enlace
 
-Contiene las operaciones relacionadas con las categorías.
+Al seleccionar **Agregar nuevo enlace**, LinkVault presenta un formulario desde el cual se puede registrar un nuevo recurso.
 
-Permite recuperar las categorías almacenadas en la base de datos para utilizarlas en formularios, filtros y listados.
+El formulario permite ingresar:
 
----
+- Título.
+- URL.
+- Descripción.
+- Tags.
+- Categoría.
 
-### `app/repositories/TagRepository.php`
+![Formulario para crear un enlace](docs/screenshots/02-create-form.png)
 
-Administra las operaciones relacionadas con los tags y la relación muchos-a-muchos entre `links` y `tags`.
+Para demostrar esta funcionalidad se utiliza **Código Facilito** como ejemplo.
 
-Entre sus responsabilidades se encuentran:
+En la siguiente captura se completa el formulario con una URL, una descripción, una categoría y diferentes tags.
 
-- obtener todos los tags;
-- obtener los tags asociados a un enlace;
-- asociar tags durante la creación de un enlace;
-- sincronizar los tags durante la edición.
+![Ejemplo de creación utilizando Código Facilito](docs/screenshots/03-create-example.png)
 
----
+Al guardar el formulario, LinkVault almacena el nuevo registro y regresa automáticamente al listado principal.
 
-### `views/links/index.php`
+El mensaje **“Enlace guardado correctamente”** confirma que la operación fue realizada.
 
-Vista principal de LinkVault.
-
-Presenta la tabla de enlaces y los controles disponibles para:
-
-- buscar;
-- filtrar por categoría;
-- filtrar favoritos;
-- visualizar categorías;
-- visualizar tags;
-- acceder a edición;
-- eliminar registros;
-- cambiar el estado de favorito.
+![Código Facilito creado correctamente](docs/screenshots/05-create-success.png)
 
 ---
 
-### `views/links/create.php`
+## ✏️ 2. Editar un enlace
 
-Contiene el formulario utilizado para crear nuevos enlaces.
+Cada registro dispone de una acción **Editar**.
 
-Permite ingresar:
+Al utilizarla, LinkVault recupera la información almacenada y la carga nuevamente en el formulario.
 
-- título;
-- URL;
-- descripción;
-- categoría;
-- tags.
+En este ejemplo se modifica el enlace de Código Facilito, incluyendo su descripción y los tags asociados.
 
----
+![Edición del enlace de Código Facilito](docs/screenshots/04-edit-form.png)
 
-### `views/links/edit.php`
+Después de guardar los cambios, la aplicación regresa al listado principal y muestra el mensaje:
 
-Contiene el formulario de edición.
+**“Enlace actualizado correctamente.”**
 
-Carga los datos existentes del enlace y permite modificar su información, categoría y tags asociados.
+También es posible observar inmediatamente los nuevos datos almacenados.
 
-Los tags previamente asociados aparecen seleccionados automáticamente.
+![Código Facilito actualizado correctamente](docs/screenshots/06-edit-success.png)
 
 ---
 
-### `public/assets/css/style.css`
+## 🗑️ 3. Eliminar un enlace
 
-Contiene los estilos propios de la interfaz.
+Para reducir el riesgo de eliminar información accidentalmente, la acción **Eliminar** no borra inmediatamente el registro.
 
-Actualmente implementa el tema oscuro, tablas, formularios, botones, badges y estructura visual general.
+Primero se presenta una ventana de confirmación indicando el enlace que será eliminado.
 
-La adaptación responsive todavía se encuentra pendiente de revisión.
+En el ejemplo se solicita eliminar el registro correspondiente a Código Facilito.
 
----
+![Confirmación para eliminar Código Facilito](docs/screenshots/07-delete-confirmation.png)
 
-### `public/assets/js/app.js`
+El usuario puede cancelar la operación o confirmar definitivamente la eliminación.
 
-Contiene la lógica ejecutada en el navegador.
+Después de confirmar, LinkVault elimina el registro y muestra el mensaje:
 
-Se utiliza para las funciones interactivas del listado, incluyendo búsqueda y filtros.
+**“Enlace eliminado correctamente.”**
 
----
+El enlace de Código Facilito deja entonces de aparecer en el listado.
 
-### `config/database.php`
-
-Configura la conexión local a MySQL mediante PDO.
-
-Este archivo contiene información específica del entorno local y no debe almacenarse públicamente con credenciales reales.
+![Eliminación de Código Facilito completada](docs/screenshots/08-delete-confirmation-main.png)
 
 ---
 
-### `config/database.example.php`
+# 🔎 Búsqueda, categorías y favoritos
 
-Plantilla de configuración que permite documentar los parámetros necesarios para establecer la conexión sin exponer credenciales locales.
+Además de las operaciones CRUD, LinkVault incorpora herramientas para facilitar la localización y organización de los enlaces almacenados.
+
+## Categorías y búsqueda
+
+Los enlaces pueden organizarse mediante categorías y localizarse utilizando el campo de búsqueda.
+
+El buscador puede comparar la información introducida con los datos disponibles en los registros, facilitando la localización de un enlace específico.
+
+En la siguiente captura se utiliza nuevamente **Código Facilito** como término de ejemplo:
+
+![Búsqueda y filtrado de enlaces](docs/screenshots/09-category-filter.png)
+
+Las categorías permiten complementar esta funcionalidad agrupando los enlaces según el tipo de recurso almacenado.
 
 ---
 
-### `database/schema.sql`
+## ⭐ Favoritos
 
-Define la estructura de la base de datos y sus tablas.
+Cada enlace puede marcarse o desmarcarse como favorito utilizando el control correspondiente.
 
-La base de datos utiliza actualmente:
+La opción **Mostrar solo favoritos** permite ocultar temporalmente los demás registros.
 
-```text
-categories
-links
-tags
-link_tag
+En el ejemplo, el filtro deja visible únicamente el enlace marcado como favorito:
+
+![Filtro de favoritos](docs/screenshots/10-favorites-filter.png)
+
+---
+
+# 📱 Diseño responsive
+
+LinkVault incorpora reglas CSS responsive para adaptar la interfaz a diferentes dimensiones de pantalla.
+
+El diseño fue probado tanto en escritorio como en resoluciones representativas de dispositivos móviles y tablets.
+
+En pantallas pequeñas:
+
+- El encabezado reorganiza sus elementos.
+- El botón principal se adapta al ancho disponible.
+- Los filtros mantienen un tamaño adecuado para la pantalla.
+- La tabla conserva su estructura.
+- Cuando la tabla supera el ancho disponible, puede recorrerse horizontalmente para acceder a las columnas restantes.
+
+Esta última decisión permite conservar la estructura tabular de LinkVault incluso en dispositivos estrechos, en lugar de eliminar información o transformar completamente los registros.
+
+## Vista móvil
+
+La siguiente captura muestra LinkVault utilizando una resolución móvil:
+
+![Vista responsive móvil](docs/screenshots/11-mobile-view.png)
+
+La tabla continúa siendo accesible mediante desplazamiento horizontal.
+
+## Vista tablet
+
+En una pantalla de mayor tamaño, la aplicación aprovecha el espacio adicional manteniendo la misma estructura general:
+
+![Vista responsive tablet](docs/screenshots/12-tablet-view.png)
+
+---
+
+# 🚀 Instalación y ejecución local
+
+## Requisitos
+
+Para ejecutar LinkVault localmente se necesita:
+
+- PHP.
+- MySQL o MariaDB.
+- Un navegador web.
+- Un entorno local compatible o acceso al servidor integrado de PHP.
+
+Durante el desarrollo del proyecto se utilizó **Laragon en Windows** para disponer fácilmente de PHP, MySQL y las herramientas necesarias para trabajar localmente.
+
+---
+
+## ⚠️ Nota sobre Laragon y su licencia
+
+**Laragon es un proyecto externo e independiente de LinkVault.**
+
+Laragon no forma parte de este repositorio, no es distribuido junto con LinkVault y mantiene sus propios términos y condiciones de uso.
+
+Las versiones actuales de Laragon utilizan un modelo de licenciamiento definido por sus desarrolladores. Determinados usos no comerciales pueden realizarse sin adquirir una licencia comercial, mientras que el uso comercial está sujeto a las condiciones y licencias establecidas por Laragon.
+
+LinkVault fue desarrollado utilizando Laragon únicamente como **entorno local de desarrollo y aprendizaje**.
+
+Por este motivo, este repositorio no concede, modifica ni sustituye ningún derecho relacionado con Laragon.
+
+Antes de instalar o utilizar Laragon, especialmente para actividades profesionales, empresariales o comerciales, se recomienda consultar la documentación y los términos de licencia oficiales vigentes del proyecto.
+
+También es posible ejecutar LinkVault utilizando otro entorno compatible con PHP y MySQL.
+
+---
+
+# ⚙️ Configuración
+
+## 1. Clonar el repositorio
+
+```bash
+git clone <URL-DEL-REPOSITORIO>
+```
+
+Ingresar posteriormente al directorio del proyecto:
+
+```bash
+cd linkvault
 ```
 
 ---
 
-### `database/seed.sql`
+## 2. Preparar la base de datos
 
-Contiene datos iniciales utilizados para preparar el entorno de desarrollo, como categorías y tags predeterminados.
-
----
-
-## Modelo de datos
-
-La estructura principal puede resumirse de la siguiente manera:
+Crear una base de datos denominada:
 
 ```text
-categories
-    │
-    │ 1:N
-    ▼
-  links
-    │
-    │ N:N
-    ▼
- link_tag
-    │
-    ▼
-   tags
+linkvault
 ```
 
-`category_id` relaciona cada enlace con su categoría principal.
-
-La tabla `link_tag` funciona como tabla intermedia para permitir que un enlace tenga múltiples tags.
-
----
-
-## Estado del proyecto
-
-LinkVault se encuentra funcional y su conjunto principal de características está implementado.
-
-Antes de preparar una versión final para portafolio todavía se revisarán algunos aspectos:
-
-- comportamiento responsive;
-- experiencia de usuario;
-- seguridad y robustez;
-- pruebas finales;
-- limpieza y revisión del código;
-- documentación de instalación;
-- actualización final del README.
-
-Por este motivo, este documento representa el estado actual del proyecto y será actualizado nuevamente antes de considerarlo una versión final.
-
----
-
-# English
-
-## Description
-
-**LinkVault** is a personal link management web application designed to store, organize, and browse useful resources through a simple interface.
-
-Each link can contain a title, URL, description, and category. Links can also be marked as favorites and associated with one or more tags.
-
-The project started as a basic CRUD application and was later restructured to separate data-access logic, views, configuration, and the application's entry point.
-
-Its primary purpose is to practice core full-stack web development concepts without relying on a backend framework, using PHP, PDO, MySQL, HTML, CSS, and JavaScript directly.
-
----
-
-## Current Features
-
-- Create links.
-- View and list stored links.
-- Edit existing links.
-- Delete links.
-- Validate URLs.
-- Prevent duplicate URLs.
-- Organize links by category.
-- Assign multiple tags to a link.
-- Update link-to-tag associations.
-- Mark and unmark links as favorites.
-- Filter links by category.
-- Display favorite links only.
-- Search by title, URL, or description.
-- Display confirmation and validation messages.
-- Dark-themed user interface.
-
----
-
-## Categories and Tags
-
-LinkVault uses two complementary systems to organize links.
-
-### Categories
-
-Each link belongs to one primary category.
-
-Examples include:
-
-- Programming
-- Documentation
-- Work
-- Tools
-- Learning
-
-Links and categories use a **many-to-one relationship**: multiple links can belong to the same category, while each link has one primary category.
-
-### Tags
-
-Tags provide additional ways to describe a link using multiple technologies or concepts.
-
-Examples include:
-
-- PHP
-- Laravel
-- JavaScript
-- MySQL
-- React
-- Git
-- API
-
-Links and tags use a **many-to-many relationship** implemented through the `link_tag` junction table.
-
-A link can have multiple tags, and the same tag can be associated with multiple links.
-
----
-
-## Technologies
-
-| Technology | Version | Purpose |
-|---|---|---|
-| PHP | 8.x* | Backend and application logic |
-| MySQL | 8.x* | Relational database |
-| PDO | Included with PHP | Database connection and queries |
-| HTML | HTML5 | View structure |
-| CSS | CSS3 | Styling and user interface |
-| JavaScript | ES6+ | Client-side search, filtering, and interactions |
-| Git | Current | Version control |
-| GitHub | — | Repository hosting and portfolio |
-| Laragon | — | Local development environment |
-| HeidiSQL | — | Database administration and inspection |
-
-\* The exact installed version will be verified before the final project documentation is prepared.
-
----
-
-## Project Structure
+Después ejecutar:
 
 ```text
-LinkVault/
-│
-├── app/
-│   └── repositories/
-│       ├── CategoryRepository.php
-│       ├── LinkRepository.php
-│       └── TagRepository.php
-│
-├── config/
-│   ├── database.php
-│   └── database.example.php
-│
-├── database/
-│   ├── schema.sql
-│   └── seed.sql
-│
-├── public/
-│   ├── assets/
-│   │   ├── css/
-│   │   │   └── style.css
-│   │   └── js/
-│   │       └── app.js
-│   │
-│   └── index.php
-│
-├── views/
-│   └── links/
-│       ├── create.php
-│       ├── edit.php
-│       └── index.php
-│
-├── .gitignore
-└── README.md
+database/schema.sql
 ```
 
----
+Este archivo contiene la estructura necesaria para crear las tablas utilizadas por LinkVault.
 
-## Application Architecture
-
-### `public/index.php`
-
-The main entry point for LinkVault.
-
-It acts as a lightweight **Front Controller**, receiving application requests and coordinating the appropriate repositories and views.
-
-Its responsibilities include link listing, creation, editing, deletion, favorites, validation, redirects, and loading categories and tags.
-
-### `app/repositories/LinkRepository.php`
-
-Contains data-access operations related to links.
-
-It centralizes the SQL operations required to retrieve, create, update, and delete links, check duplicate URLs, and manage favorite status.
-
-### `app/repositories/CategoryRepository.php`
-
-Contains category-related data-access operations and provides category data to forms, filters, and views.
-
-### `app/repositories/TagRepository.php`
-
-Manages tags and the many-to-many relationship between links and tags.
-
-It retrieves available tags, retrieves tags assigned to individual links, creates associations, and synchronizes them when a link is edited.
-
-### `views/links/index.php`
-
-The main application view.
-
-It displays stored links and provides search, category filtering, favorite filtering, tag and category information, and link management actions.
-
-### `views/links/create.php`
-
-Contains the form used to create links and assign their category and tags.
-
-### `views/links/edit.php`
-
-Contains the link editing form.
-
-Existing link information is loaded into the form, including the currently assigned tags.
-
-### `public/assets/css/style.css`
-
-Contains the application's custom styles, including its dark theme, forms, tables, buttons, badges, and general layout.
-
-Responsive behavior is still scheduled for additional review.
-
-### `public/assets/js/app.js`
-
-Contains client-side application behavior, including search and filtering functionality.
-
-### `config/database.php`
-
-Defines the local PDO database connection.
-
-Environment-specific credentials should not be committed to a public repository.
-
-### `config/database.example.php`
-
-Provides an example database configuration without exposing local credentials.
-
-### `database/schema.sql`
-
-Defines the relational database structure.
-
-The current database contains:
+Opcionalmente se puede ejecutar:
 
 ```text
-categories
-links
-tags
-link_tag
+database/seed.sql
 ```
 
-### `database/seed.sql`
-
-Provides initial development data such as default categories and tags.
+para incorporar los datos iniciales incluidos con el proyecto.
 
 ---
 
-## Data Model
+## 3. Configurar la conexión
+
+El proyecto incluye el archivo:
 
 ```text
-categories
-    │
-    │ 1:N
-    ▼
-  links
-    │
-    │ N:N
-    ▼
- link_tag
-    │
-    ▼
-   tags
+config/database.example.php
 ```
 
-Each link references its primary category through `category_id`.
+Crear una copia con el nombre:
 
-The `link_tag` junction table implements the many-to-many relationship between links and tags.
+```text
+config/database.php
+```
+
+y configurar los datos correspondientes al entorno local.
+
+Ejemplo:
+
+```php
+$host = 'localhost';
+$dbname = 'linkvault';
+$user = 'root';
+$password = '';
+```
+
+`database.php` representa la configuración local y no debe utilizarse para publicar credenciales privadas o reales en el repositorio.
 
 ---
 
-## Project Status
+# ▶️ Ejecución utilizando Laragon
 
-LinkVault is currently functional, and its primary feature set has been implemented.
+El procedimiento utilizado durante el desarrollo fue el siguiente:
 
-Before preparing the final portfolio release, additional work is planned for:
+### 1. Iniciar Laragon
 
-- responsive behavior;
-- user experience improvements;
-- security and robustness;
-- final testing;
-- code cleanup and review;
-- installation documentation;
-- final README revision.
+Ejecutar Laragon y comprobar que **MySQL** se encuentre iniciado.
 
-This README therefore documents the project's current state and will be updated again before the final portfolio release.
+### 2. Abrir una terminal
+
+Desde la terminal, ingresar a la carpeta raíz de LinkVault.
+
+Por ejemplo:
+
+```powershell
+cd "E:\Desarrollo\Portafolio\01 - LinkVault"
+```
+
+> La ruta anterior corresponde únicamente a un ejemplo de la ubicación utilizada durante el desarrollo. Cada usuario debe utilizar la ruta donde haya clonado o descargado el proyecto.
+
+### 3. Iniciar el servidor PHP
+
+Ejecutar:
+
+```bash
+php -S localhost:8000 -t public
+```
+
+La opción:
+
+```text
+-t public
+```
+
+establece `public/` como raíz pública del servidor.
+
+De esta manera, `public/index.php` funciona como punto de entrada de la aplicación y los directorios internos del proyecto no se utilizan como raíz pública.
+
+### 4. Abrir LinkVault
+
+Desde el navegador ingresar a:
+
+```text
+http://localhost:8000
+```
+
+Si PHP, MySQL y la configuración de la base de datos están funcionando correctamente, se mostrará la página principal de LinkVault.
+
+---
+
+# 🧠 Objetivo del proyecto
+
+LinkVault es principalmente un **proyecto de práctica, aprendizaje y portafolio**.
+
+No fue desarrollado con el objetivo de competir con servicios comerciales de gestión de marcadores.
+
+Su propósito es poner en práctica fundamentos de desarrollo web construyendo una aplicación funcional desde sus componentes básicos antes de avanzar hacia frameworks y arquitecturas de mayor nivel.
+
+Durante su desarrollo se practicaron conceptos como:
+
+- Organización de un proyecto PHP.
+- Separación entre lógica, acceso a datos y presentación.
+- Operaciones CRUD.
+- Formularios y procesamiento de solicitudes.
+- Acceso a MySQL mediante PDO.
+- Consultas preparadas.
+- Relaciones entre tablas.
+- Relaciones many-to-many mediante tags.
+- Categorías.
+- Validación de datos.
+- Prevención de URLs duplicadas.
+- Patrón Post/Redirect/Get.
+- Manipulación del DOM mediante JavaScript.
+- Búsqueda y filtrado.
+- Gestión de favoritos.
+- Diseño responsive.
+- Control de versiones mediante Git.
+- Documentación de proyectos mediante GitHub.
+
+---
+
+# 🔐 Consideraciones de seguridad
+
+LinkVault incorpora prácticas básicas de seguridad y organización apropiadas para el alcance educativo del proyecto:
+
+- Consultas preparadas mediante PDO.
+- Validación de datos recibidos desde formularios.
+- Escape de información presentada en las vistas.
+- Separación de la configuración de base de datos.
+- Exclusión de credenciales locales mediante `.gitignore`.
+- Validación de URLs duplicadas.
+
+Al tratarse de un proyecto educativo y no de una aplicación preparada para producción, existen aspectos que podrían ampliarse posteriormente, como:
+
+- Autenticación de usuarios.
+- Autorización y roles.
+- Protección CSRF.
+- Gestión avanzada de sesiones.
+- Registro de actividad.
+- Configuración para despliegue en producción.
+- Pruebas automatizadas.
+
+---
+
+# 📌 Estado del proyecto
+
+**Estado actual: funcional — proyecto de práctica y portafolio.**
+
+Las principales funcionalidades planificadas se encuentran implementadas:
+
+**CRUD + categorías + tags + favoritos + búsqueda + filtros + persistencia MySQL + diseño responsive.**
+
+El proyecto puede continuar evolucionando a medida que se incorporen nuevos conocimientos y funcionalidades.
+
+---
+
+# 👨‍💻 Autor
+
+**Carlos Orellana**
+
+Analista Programador.
+
+Proyecto desarrollado como parte de un portafolio personal orientado a reforzar y demostrar conocimientos de desarrollo web.
+
+---
+
+# 📄 Licencias y marcas de terceros
+
+LinkVault es un proyecto personal de aprendizaje y portafolio.
+
+Las herramientas, tecnologías, sitios web, servicios, nombres comerciales y marcas mencionados pertenecen a sus respectivos propietarios.
+
+Las referencias utilizadas dentro de los datos de demostración tienen exclusivamente una finalidad ilustrativa y educativa y **no representan afiliación, patrocinio ni relación comercial** con este proyecto o su autor.
+
+Las herramientas externas utilizadas durante el desarrollo, incluyendo Laragon, mantienen sus propias licencias y términos de uso.
