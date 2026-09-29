@@ -60,7 +60,7 @@ body {
 .links-table td {
     padding: 14px 12px;
     border-bottom: 1px solid #374151;
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
 }
 
@@ -93,8 +93,18 @@ body {
 
 .actions {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
+}
+
+.actions .btn {
+    width: 82px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
 }
 
 .btn {
@@ -272,4 +282,36 @@ textarea.form-control {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .links-table {
+        min-width: 850px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .page-header .btn {
+        width: 100%;
+        text-align: center;
+    }
 }
